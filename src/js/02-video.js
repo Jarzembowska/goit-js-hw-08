@@ -9,7 +9,7 @@ const onPlay = function (data) {
   console.log(data.seconds);
 };
 
-// zapis lub aktualizacja w lokalnym magazynie istniejącego czasu video
+// zapis lub aktualizacja w lokalnej pamięci istniejącego czasu video
 // setItem(key, value)
 const savePlayerTime = data => {
   console.log(data.seconds);
@@ -22,12 +22,12 @@ player.on('ended', () => {
   player.unload();
 });
 
-// oczyt zapisanego czasu video z lokalnego magazynu
+// oczyt zapisanego czasu video z lokalnej pamięci
 const getLocalTime = () => {
   const savedTime = localStorage.getItem('videoplayer-current-time');
   if (savedTime === 0) return 0;
 
-  const parsedTime = JSON.parse(savedTime); // zmniejszamy(sprasowujemy) dane czasu zapisanego w lokalnym magazynie
+  const parsedTime = JSON.parse(savedTime); // zmniejszamy(sprasowujemy) dane czasu zapisanego w lokalnej pamięci
   return Number(parsedTime);
 };
 
