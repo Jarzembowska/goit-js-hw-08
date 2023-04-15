@@ -30,6 +30,7 @@ const getLocalTime = () => {
   const parsedTime = JSON.parse(savedTime);
   return Number(parsedTime);
 };
+
 const resumePlayerOnLastTime = () => {
   const lastPlayedTime = getLocalTime();
   player.setCurrentTime(lastPlayedTime);
