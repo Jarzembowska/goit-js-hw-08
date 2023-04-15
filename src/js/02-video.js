@@ -27,7 +27,7 @@ const getLocalTime = () => {
   const savedTime = localStorage.getItem('videoplayer-current-time');
   if (savedTime === 0) return 0;
 
-  const parsedTime = JSON.parse(savedTime);
+  const parsedTime = JSON.parse(savedTime); // zmniejszamy(sprasowujemy) dane czasu zapisanego w lokalnym magazynie
   return Number(parsedTime);
 };
 
