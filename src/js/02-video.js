@@ -5,18 +5,14 @@ const iframe = document.querySelector('iframe');
 
 const player = new Player(iframe);
 
-const onPlay = function (data) {
-  console.log(data.seconds);
-};
-
 // zapis lub aktualizacja w lokalnej pamięci istniejącego czasu video
 // setItem(key, value)
-const savePlayerTime = data => {
+const savePlayerTime = throttle(data => {
   console.log(data.seconds);
-  localStorage.setItem('videoplayer-current-time', data.seconds);
-};
+  localStorage.setItem('videoplayer-current-time', data.seconds), 1000;
+});
 
-player.on('timeupdate', throttle(savePlayerTime, 1000));
+player.on('timeupdate', savePlayerTime);
 player.on('ended', () => {
   localStorage.removeItem('videoplayer-current-time');
   player.unload();
