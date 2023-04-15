@@ -8,17 +8,25 @@ const player = new Player(iframe);
 // zapis lub aktualizacja w lokalnej pamięci istniejącego czasu video
 // setItem(key, value)
 const savePlayerTime = throttle(data => {
-  console.log(data.seconds);
+  // console.log(data.seconds);
   localStorage.setItem('videoplayer-current-time', data.seconds), 1000;
 });
 
-player.on('timeupdate', savePlayerTime);
-player.on('ended', () => {
+const endPlayerTime = function () {
   localStorage.removeItem('videoplayer-current-time');
   player.unload();
-});
+};
 
-// oczyt zapisanego czasu video z lokalnej pamięci
+player.on('play', function () {
+  console.log('played the video!');
+});
+player.on('timeupdate', savePlayerTime);
+player.getVideoTitle().then(function (title) {
+  console.log('title:', title);
+});
+player.on('ended', endPlayerTime);
+
+// odczyt zapisanego czasu video z lokalnej pamięci
 const getLocalTime = () => {
   const savedTime = localStorage.getItem('videoplayer-current-time');
   if (savedTime === 0) return 0;
